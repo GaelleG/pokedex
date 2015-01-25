@@ -1,0 +1,85 @@
+/* ========================================================================== */
+/* =============== %%%%% %%%%% %  %% %%%%% %%%%  %%%%% %    % =============== */
+/* =============== %   % %   % % %%  %     %  %% %      %  %  =============== */
+/* =============== %%%%% %   % %%%   %%%%  %   % %%%%    %%   =============== */
+/* =============== %     %   % % %%  %     %  %% %      %  %  =============== */
+/* =============== %     %%%%% %  %% %%%%% %%%%  %%%%% %    % =============== */
+/* ========================================================================== */
+body {
+  margin: 0px;
+  background-color: #ffffff;
+  font-family: arial;
+  font-size: 14px;
+  color: #333333;
+}
+input[type=text] {
+  height: 33px;
+  font-family: arial;
+  font-size: 14px;
+  padding: 0px 10px;
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+}
+header,
+footer {
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+header:before,
+footer:before {
+  content: " ";
+  display: block;
+  height: 10px;
+  width: 100%;
+  position: absolute;
+  background-color: #333333;
+}
+header:after,
+footer:after {
+  content: " ";
+  display: block;
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  left: calc(50vw - 60px);
+  background-color: #ffffff;
+  border: 20px solid #333333;
+  border-radius: 100%;
+}
+header {
+  background-color: #e83c3c;
+}
+header:before {
+  bottom: 0px;
+}
+header:after {
+  bottom: -60px;
+}
+footer {
+  background-color: #ffffff;
+}
+footer:before {
+  top: 0px;
+}
+footer:after {
+  top: -60px;
+}
+.main {
+  padding: 50px;
+  background-color: #cccccc;
+}
+form {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  background-color: #ffffff;
+  margin-bottom: 10px;
+}
+.pokemon {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  background-color: #ffffff;
+  margin-bottom: 1px;
+}
