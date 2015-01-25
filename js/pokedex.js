@@ -46,18 +46,58 @@
 
   // --------------------------------------------------- POKEMON_LIST.COLLECTION
   var PokemonList = Backbone.Collection.extend({
-    model: Pokemon
+    model: Pokemon,
+    getPokemonsByName: function (name) {
+      if (typeof name !== "string" || name.length === 0) {
+        this.reset(pokemonsMock);
+        return;
+      }
+      var models = [];
+      for (var i in pokemonsMock) {
+        for (var j in pokemonsMock[i].name) {
+          if ((pokemonsMock[i].name[j]).toUpperCase().indexOf(name.toUpperCase()) !== -1) {
+            models.push(pokemonsMock[i]);
+            break;
+          }
+        }
+      }
+      this.reset(models);
+    }
   });
 
   // --------------------------------------------------------- POKEMON_LIST.VIEW
   var PokemonListView = Backbone.View.extend({
     el: $("#pokemon-list"),
+    initialize: function () {
+      this.collection.on('reset', this.render, this);
+    },
     render: function () {
+      this.el.innerHTML = "";
       this.collection.forEach(this.addOne, this);
     },
     addOne: function (pokemon) {
       var pokemonView = new PokemonView({model: pokemon});
       this.el.appendChild(pokemonView.render().el);
+    }
+  });
+
+  // ---------------------------------------------------------- APPLICATION.VIEW
+  var PokedexView = Backbone.View.extend({
+    el: $("#pokedex"),
+    events: {
+      "keyup #name":  "getPokemonsByName"
+    },
+    initialize: function () {
+      this.inputName = $("#name")[0];
+      this.timeoutGetPokemons = null;
+    },
+    getPokemonsByName: function () {
+      clearTimeout(this.timeoutGetPokemons);
+      this.timeoutGetPokemons = setTimeout((function (name) {
+        return function () {
+          pokemonList.getPokemonsByName(name);
+        };
+      })(this.inputName.value), 200);
     }
   });
 
@@ -104,5 +144,7 @@
 
   var pokemonListView = new PokemonListView({collection: pokemonList});
   pokemonListView.render();
+
+  var pokedexView = new PokedexView();
   
 })();
